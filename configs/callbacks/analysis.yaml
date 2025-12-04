@@ -1,0 +1,4 @@
+analysis_callback:
+  _target_: src.callbacks.analysis_callback.AnalysisCallback
+  dirpath: ${paths.output_dir}/analysis
+  frequency: 10

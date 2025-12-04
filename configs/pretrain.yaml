@@ -1,0 +1,29 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: dgx
+  - data: pretrain_dgx
+  - optimizer: pretrain_150
+  - postprocessor: default
+  - losses: default
+  - model: pretrain
+  - callbacks: pretrain
+  - logger: tensorboard
+  - trainer: gpu_pretrain_150
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "exp_7_aux_head"
+description: "exp_7_aux_head"
+is_local_run: False
+dotenv_path: ".env"
+tags: ["exp_7_aux_head_pretrain"]
+test: True
+hyper_search: False
+seed: 42

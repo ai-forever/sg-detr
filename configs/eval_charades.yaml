@@ -1,0 +1,18 @@
+defaults:
+  - paths: charades
+  - data:  charades
+  - optimizer: default
+  - postprocessor: charades
+  - losses: charades
+  - model: charades
+  - callbacks: eval
+  - trainer: gpu_charades
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+checkpoint: "/data/reps/moment_retrieval/mr-train-repo/logs_charades/41_charades_post/runs/2024-09-18_01-05-09/checkpoints/epoch_epoch=102.ckpt"
+task_name: "eval_model"

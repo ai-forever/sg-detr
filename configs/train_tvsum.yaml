@@ -1,0 +1,30 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: tvsum
+  - data: tvsum
+  - optimizer: tvsum
+  - postprocessor: default
+  - losses: tv_sum
+  - model: tv_sum
+  - callbacks: tvsum
+  - logger: tensorboard
+  - trainer: gpu_tvsum
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "TVSUM test"
+exp_list_name: "Finetune_base"
+description: "Current state of the main branch"
+is_local_run: False
+dotenv_path: ".env"
+tags: ["TVSUM_finetune"]
+test: True
+hyper_search: False
+seed: 42

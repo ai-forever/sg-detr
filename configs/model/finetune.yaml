@@ -1,0 +1,161 @@
+defaults:
+  - /optimizer: finetune
+  - /postprocessor: default
+  - /losses: default
+  - _self_
+
+model_dim: 256
+cont_pos_tradeoff: 0
+num_dummies: 45
+num_queries: 25
+dropout: 0.1
+droppath: 0.15
+proj_dropout: 0.5
+predict_quality_score: True
+pos_temp: 10000
+prior_prob: 0.35
+init_spans_with_zeros: True
+use_rpn: True
+use_encoder_features: True
+check_train_every_n_epoch: 5
+checkpoint_path: "..."
+use_cross_attn_wo_dummy: True
+weight_attn_with_saliency: True
+use_global_saliency_head: True
+
+reference: null
+  # _target_: src.model.blocks.anchor.RandomAnchor
+  # num_queries: ${model.num_queries}
+  # uniform: False
+  # _target_: src.model.blocks.anchor.LayerAnchor
+  # num_queries: ${model.num_queries}
+  # ratios: [0.52, 0.24, 0.12, 0.08]  # Defines the initialization of anchors by levels
+  # special_anchor: False  # Determines whether to add a special anchor for the entire video
+
+audio_merger:
+  _target_: src.model.blocks.audio.AudioMerger
+  merge_type: null  # one of {null, concat, crossattn, coattn, bottleneck}
+  num_layers: 1
+  num_tokens: 4  # in case of bottleneck
+  model_dim: ${model.model_dim}
+  dropout: ${model.dropout}
+  droppath: ${model.droppath}
+
+txt2vis_encoder:
+  _target_: src.model.blocks.encoder.Text2VisionEncoder
+  d_model: ${model.model_dim}
+  num_dummies: ${model.num_dummies}
+  num_t2v_layers: 2
+  dropout: ${model.dropout}
+  droppath: ${model.droppath}
+  remove_dummy: True
+  use_cross_attn_wo_dummy: ${model.use_cross_attn_wo_dummy}
+  weight_attn_with_saliency: ${model.weight_attn_with_saliency}
+
+query_selector:
+  _target_: src.model.blocks.detector.QuerySelector
+  model_dim: ${model.model_dim}
+  num_queries: ${model.num_queries}
+  prior_prob: ${model.prior_prob}
+  default_widths: [0.05, 0.2, 0.4, 0.85]
+  init_spans_with_zeros: ${model.init_spans_with_zeros}
+
+det_encoder:
+  _target_: src.model.blocks.detector.DetectorEncoder
+  model_dim: ${model.model_dim}
+  num_encoder_layers: 3
+  dropout: ${model.dropout}
+  droppath: ${model.droppath}
+
+aux_det_head:
+  _target_: src.model.blocks.atss.ATSSHead
+  in_channels: ${model.model_dim}
+  top_k_positive_anchors: 12
+  num_convs: 3
+  prior_probability: ${model.prior_prob}
+  fpn_strides: [0.5, 1, 2, 4]
+  anchor_sizes: [4, 16, 32, 64]
+
+detr_detector:
+  _target_: src.model.blocks.detector.MomentDetector
+  reference: ${model.reference}
+  model_dim: ${model.model_dim}
+  cont_pos_tradeoff: ${model.cont_pos_tradeoff}
+  use_rpn: ${model.use_rpn}
+  use_encoder_features: ${model.use_encoder_features}
+  num_queries: ${model.num_queries}
+  num_decoder_layers: 3
+  dropout: ${model.dropout}
+  droppath: ${model.droppath}
+  temperature: ${model.pos_temp}
+  prior_prob: ${model.prior_prob}
+  unique_content_queries: True
+  init_spans_with_zeros: ${model.init_spans_with_zeros}
+  return_intermediate_dec: True
+  predict_quality_score: ${model.predict_quality_score}
+  num_groups: 300
+  span_noise_scale: 0.5
+  negative_offset: 1.25
+  look_at_target: False
+  aux_anchors_type: ["collab"]  # "denoise",
+
+local_saliency_head:
+  _target_: src.model.blocks.encoder.LocalSaliencyHead
+  model_dim: ${model.model_dim}
+  use_projections: False
+  logit_mode: "exp_b"  # "linear" # "exp"
+  use_gamma: False
+  num_aggregation_layers: 2
+
+saliency_amplifier:
+  _target_: src.model.blocks.encoder.SaliencyAmplifier
+  d_model: ${model.model_dim}
+  mode: "sigmoid"  # sigmoid, softmax, sin
+  use_mha: False
+  use_norm: False
+
+mr2hd:
+  _target_: src.model.blocks.encoder.MR2HD
+  model_dim: ${model.model_dim}
+  aggregation_mode: "none"  # "gru", "attention", "mean", "max", "none"
+  score_mode: "probs"  # "probs", "iou", "probs_iou"
+
+runner:
+  _target_: src.litmodule.MomentRetrievalRunner
+  losses: ${losses.losses}
+  optimizer: ${optimizer.optimizer}
+  scheduler: ${optimizer.scheduler}
+  postprocessor: ${postprocessor.postprocessor}
+  preparator: ${postprocessor.preparator}
+  checkpoint_path: ${model.checkpoint_path}
+  check_train_every_n_epoch: ${model.check_train_every_n_epoch}
+  model:
+    _target_: src.model.model.MRDETR
+    audio_merger: ${model.audio_merger}
+    txt2vis_encoder: ${model.txt2vis_encoder}
+    det_encoder: ${model.det_encoder}
+    query_selector: ${model.query_selector}
+    detr_detector: ${model.detr_detector}
+    aux_det_head: ${model.aux_det_head}
+    saliency_amplifier: ${model.saliency_amplifier}
+    # mr2hd: ${model.mr2hd}
+    local_saliency_head: ${model.local_saliency_head}
+    use_global_saliency_head: ${model.use_global_saliency_head}
+    batch_size: ${data.batch_size}
+    model_dim: ${model.model_dim}
+    aud_dim: 770
+    vid_dim: 514
+    txt_dim: 512
+    max_video_length: 76
+    num_input_proj_layers: 2
+    num_dummy_layers: 2
+    num_sentence_layers: 1
+    num_moment_layers: 1
+    dropout: ${model.dropout}
+    droppath: ${model.droppath}
+    proj_dropout: ${model.proj_dropout}
+    pos_temp: ${model.pos_temp}
+    aux_loss: True
+    use_txt_pos: False
+    saliency_video_features_mode: "memory" # "src", "memory", "memory_amplified"
+    saliency_video_text_features_mode: "memory" # "memory", "memory_amplified"

@@ -1,0 +1,31 @@
+_target_: src.datamodule.MomentRetrievalDataModule
+num_workers: 20
+batch_size: 256
+
+# annotation paths
+annotation_path_train: /data/dataset/moment_retrieval/pretrain/pretrain_annotation_150k.jsonl
+annotation_path_val: /data/dataset/moment_retrieval/qvhighlights/annotation/highlight_val_release.jsonl
+annotation_path_test: /data/dataset/moment_retrieval/qvhighlights/annotation/highlight_val_release.jsonl
+
+# caption paths
+query_feat_dir_train: /data/dataset/moment_retrieval/pretrain/text_embeddings
+query_feat_dir_val: /data/dataset/moment_retrieval/qvhighlights/custom_text/all
+query_feat_dir_test: /data/dataset/moment_retrieval/qvhighlights/custom_text/all
+
+# video paths
+video_feat_dir_train: /data/dataset/moment_retrieval/pretrain/video_embeddings_55k
+video_feat_dir_val: /data/dataset/moment_retrieval/qvhighlights/custom_features/video_embs
+video_feat_dir_test: /data/dataset/moment_retrieval/qvhighlights/custom_features/video_embs
+
+# dataset partial init
+dataset:
+  _target_: src.dataset.qvhighlights.QVHighlights
+  _partial_: true
+  max_query_length: 40
+  max_video_length: 75
+  data_ratio: 1
+  normalize_video: true
+  normalize_query: true
+  use_tef: true
+  clip_len: 2
+  max_windows: 10

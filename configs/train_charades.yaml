@@ -1,0 +1,29 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: charades
+  - data: charades
+  - optimizer: charades
+  - postprocessor: charades
+  - losses: charades
+  - model: charades
+  - callbacks: charades
+  - logger: tensorboard
+  - trainer: gpu_charades
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "45_charades_pp_025_lr5e4_40_50_gamma_05_bs_64_positive_anchors_18"
+description: "Current state of the main branch"
+is_local_run: False
+dotenv_path: ".env"
+tags: ['charades_new']
+test: True
+hyper_search: False
+seed: 45

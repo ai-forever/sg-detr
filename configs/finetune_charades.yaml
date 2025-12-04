@@ -1,0 +1,29 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: charades
+  - data: charades
+  - optimizer: finetune_charades
+  - postprocessor: charades
+  - losses: charades
+  - model: finetune_charades
+  - callbacks: charades
+  - logger: tensorboard
+  - trainer: gpu_finetune_charades
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "42_finetune_charades_8_12_warmup_steps_5"
+description: "41_finetune_charades"
+is_local_run: False
+dotenv_path: ".env"
+tags: ["charades_finetune"]
+test: True
+hyper_search: False
+seed: 42

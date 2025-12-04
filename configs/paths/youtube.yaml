@@ -1,0 +1,5 @@
+root_dir: /data/reps/moment_retrieval/mr-train-repo  # path to root directory
+data_dir: ${paths.root_dir}/data/  # path to data directory
+log_dir: ${paths.root_dir}/logs_youtube/  # path to logging directory
+output_dir: ${hydra:runtime.output_dir}  # path to output directory, created dynamically by hydra
+work_dir: ${hydra:runtime.cwd}  # path to working directory

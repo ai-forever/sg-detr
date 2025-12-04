@@ -1,0 +1,57 @@
+repos:
+- repo: https://github.com/pre-commit/pre-commit-hooks
+  rev: v4.4.0
+  hooks:
+    - id: check-json
+    - id: check-yaml
+    - id: check-merge-conflict
+    - id: debug-statements
+    - id: end-of-file-fixer
+    - id: trailing-whitespace
+    - id: requirements-txt-fixer
+    - id: check-added-large-files
+      args: [--maxkb=500]
+
+- repo: local
+  hooks:
+    - id: flake8
+      name: flake8
+      entry: flake8
+      language: python
+      types: [python]
+      stages: [commit]
+
+- repo: local
+  hooks:
+    - id: black
+      name: black
+      entry: black
+      language: python
+      types: [python]
+      stages: [commit]
+      args:
+        - --target-version=py310
+        - --line-length=120
+        - --exclude=\.git|\.hg|\.mypy_cache|\.tox|\.venv|_build|buck-out|build|dist
+        - --include=\.pyi?$
+        - --diff
+
+- repo: local
+  hooks:
+    - id: isort
+      name: isort
+      entry: isort
+      language: python
+      types: [python]
+      stages: [commit]
+      args: [--profile=black]
+
+- repo: local
+  hooks:
+    - id: mypy
+      name: mypy
+      entry: mypy
+      language: python
+      types: [python]
+      stages: [commit]
+      args: [--check-untyped-defs]

@@ -1,0 +1,26 @@
+postprocessor:
+  _target_: src.postprocessor.postprocessing.PostProcessorDETR
+  clip_length: 2
+  min_ts_val: 0
+  max_ts_val: 150
+  min_w_l: 2
+  max_w_l: 150
+  move_window_method: "center"
+  nms_threshold: null
+  nms_attribute: "probs"
+  ranking_attribute: "combo"
+
+preparator:
+  _target_: src.postprocessor.postprocessing.Preparator
+  pre_nms_thresh: 0.05
+  nms_thresh: 0.5
+
+combiner:
+  _target_: src.postprocessor.postprocessing.OutputCombiner
+  pre_nms_thresh: 0.01
+  nms_thresh: 0.75
+  fpn_post_nms_top_n: 10
+  ranking_attribute: "combo"  # ["combo" ,"probs", "iou"]
+  iou_thr: 0.8
+  skip_box_thr: 0.1
+  weights: [1, 2.5]

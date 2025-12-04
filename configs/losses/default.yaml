@@ -1,0 +1,65 @@
+use_focal: False
+gamma_focal: 1.5
+
+matcher:
+  _target_: src.losses.matcher.HungarianMatcher
+  cost_iou: 1
+  cost_class: 4
+  cost_span: 10
+  cost_giou: 1
+  cost_reference: 0
+
+weight_dict:
+  loss_saliency: 1.0
+  # reg losses
+  loss_span: 10.0
+  loss_giou: 1.0
+  loss_label: 5.0
+  loss_quality: 1.0
+  loss_vfl: 0.0
+  # aux head losses
+  aux_loss_label: 2.0
+  aux_loss_span: 0.1
+  aux_loss_giou: 2.0
+  aux_loss_ctrness: 0.5
+  # other losses
+  loss_orthogonal: 1.0
+  loss_ms_align: 1.0
+  loss_momcls: 3.0
+  loss_multiple_spans: 0
+  center_l1_ref: 0
+  width_l1_ref: 0
+
+main_reg_losses:
+  _target_: src.losses.regression_losses.retrieval_losses.MainRegressionLosses
+  backgorund_weight: 0.1
+  use_focal: ${losses.use_focal}
+  gamma: ${losses.gamma_focal}
+  alpha: null
+  encoder_coef: 0.5
+  weights_loss_params:
+    gamma: 5
+    max_weight: 2
+  multiple_criterion: null
+  use_label_weights: False
+  use_span_weights: False
+  quality_scoring_mode: "positive" # If "positive" scoring_criterion will be considered only for matched segments, if "all" for all
+  center_offset_margin: 0.1
+  width_offset_margin: 0.15
+
+losses:
+  _target_: src.losses.losses.SetCriterion
+  matcher: ${losses.matcher}
+  weight_dict: ${losses.weight_dict}
+  main_reg_losses: ${losses.main_reg_losses}
+  top_k_positive_anchors: 12
+  saliency_margin: 0.15
+  contrastive_reducer: 1
+  denoise_reducer: 0.5
+  colab_ref_reducer: 0.5
+  one2one: True
+  target_repeat: 3
+  use_focal: ${losses.use_focal}
+  gamma: ${losses.gamma_focal}
+  local_saliency_loss_scale: 1.0
+  use_negative_losses: True

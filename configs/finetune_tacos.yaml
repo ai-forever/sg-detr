@@ -1,0 +1,29 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: tacos_dgx
+  - data: tacos_dgx
+  - optimizer: finetune_tacos
+  - postprocessor: tacos
+  - losses: tacos
+  - model: finetune_tacos
+  - callbacks: tacos
+  - logger: tensorboard
+  - trainer: gpu_finetune_tacos
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "44_tacos_finetune_14_22"
+description: "exp_7_aux_head"
+is_local_run: False
+dotenv_path: ".env"
+tags: ["tacos_finetune"]
+test: True
+hyper_search: False
+seed: 44

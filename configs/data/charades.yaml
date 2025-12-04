@@ -1,0 +1,35 @@
+_target_: src.datamodule.MomentRetrievalDataModule
+num_workers: 20
+batch_size: 64 #64 #128 #64 #32 #64 # 128
+
+# annotation paths
+annotation_path_train: /data/dataset/moment_retrieval/charades/charades_train_updated_V2.jsonl
+annotation_path_val: /data/dataset/moment_retrieval/charades/charades_test_updated_V2.jsonl
+annotation_path_test: /data/dataset/moment_retrieval/charades/charades_test_updated_V2.jsonl
+
+# caption paths
+query_feat_dir_train: /data/dataset/moment_retrieval/charades/custom_features/custom_text/
+query_feat_dir_val: /data/dataset/moment_retrieval/charades/custom_features/custom_text/
+query_feat_dir_test: /data/dataset/moment_retrieval/charades/custom_features/custom_text/
+
+# video paths
+video_feat_dir_train: /data/dataset/moment_retrieval/charades/custom_features/video/
+video_feat_dir_val: /data/dataset/moment_retrieval/charades/custom_features/video/
+video_feat_dir_test: /data/dataset/moment_retrieval/charades/custom_features/video/
+
+# audio_paths
+audio_feat_dir_train: null  # /data/dataset/moment_retrieval/qvhighlights/custom_features/audio
+audio_feat_dir_val: null  # /data/dataset/moment_retrieval/qvhighlights/custom_features/audio
+audio_feat_dir_test: null  # /data/dataset/moment_retrieval/qvhighlights/custom_features/audio
+
+dataset:
+  _target_: src.dataset.qvhighlights.QVHighlights
+  _partial_: true
+  max_query_length: 40
+  max_video_length: 200 #75
+  data_ratio: 1
+  normalize_video: true
+  normalize_query: true
+  use_tef: true
+  clip_len: 1
+  max_windows: 10

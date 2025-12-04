@@ -1,0 +1,11 @@
+defaults:
+  - lr_monitor_callback
+  - model_checkpoint
+  - rich_progress_bar
+  - _self_
+
+# freeze_callback:
+#   _target_: src.callbacks.freeze_callback.FreezeCallback
+#   new_lr: 5e-4
+#   freeze_epoch: 15
+#   freeze_param_group: "reference"

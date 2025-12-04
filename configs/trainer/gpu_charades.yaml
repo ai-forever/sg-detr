@@ -1,0 +1,9 @@
+defaults:
+  - default
+  - _self_
+
+accelerator: gpu
+devices: 1
+min_steps: 500000  # prevents early stopping
+max_steps: 500000  # steps to train for
+max_epochs: 100  # epochs to train for

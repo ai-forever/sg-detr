@@ -1,0 +1,41 @@
+# @package _global_
+defaults:
+  - override /paths: default
+  - override /data: qvhighlights
+  - override /trainer: default
+  - override /model: default
+
+paths:
+  root_dir: path/to/local/mr-train-repo  # path to root directory
+  data_dir: ${paths.root_dir}/data/  # path to data directory
+
+data:
+  num_workers: 0
+  batch_size: 2
+  annotation_path_train: path/to/local/highlight_train_release.jsonl
+  annotation_path_val: path/to/local/highlight_val_release.jsonl
+  annotation_path_test: path/to/local/highlight_val_release.jsonl
+
+  query_feat_dir_train: path/to/local/clip_text_features_updated
+  query_feat_dir_val: path/to/local/clip_text_features_updated
+  query_feat_dir_test: path/to/local/clip_text_features_updated
+
+  video_feat_dir_train: path/to/local/viclip_features
+  video_feat_dir_val: path/to/local/viclip_features
+  video_feat_dir_test: path/to/local/viclip_features
+
+  audio_feat_dir_train: path/to/local/viclip_features
+  audio_feat_dir_val: path/to/local/viclip_features
+  audio_feat_dir_test: path/to/local/viclip_features
+
+model:
+  runner:
+    model:
+      vid_dim: 770
+      aud_dim: 770
+      txt_dim: 768
+
+trainer:
+  precision: null
+
+is_local_run: True

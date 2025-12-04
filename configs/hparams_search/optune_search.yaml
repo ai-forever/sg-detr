@@ -1,0 +1,52 @@
+# @package _global_
+
+# postgres guide: https://www.notion.so/Postgres-Setup-for-Optuna-9d8d88a186bf461782c52eacdf2ba57e
+# example hyperparameter optimization of some experiment with Optuna:
+# PYTHONPATH=$(pwd) CUDA_VISIBLE_DEVICES=0 python src/cli/train.py hparams_search=optune_search hydra.sweeper.sampler.seed=0
+
+defaults:
+  - override /hydra/sweeper: optuna
+  - override /trainer: gpu
+
+hyper_search: True
+
+trainer:
+  min_steps: 27000  # prevents early stopping
+  max_steps: 27000  # steps to train for
+
+# metric which will be optimized by Optuna
+optimized_metric: "test/MR-mAP-Full_Avg"
+database: "denoise_iou"
+db_cred: "postgres"
+
+# here we define Optuna hyperparameter search
+# it optimizes for value returned from function with @hydra.main decorator
+# docs: https://hydra.cc/docs/next/plugins/optuna_sweeper
+hydra:
+  mode: "MULTIRUN" # set hydra to multirun by default if this config is attached
+  sweeper:
+    _target_: hydra_plugins.hydra_optuna_sweeper.optuna_sweeper.OptunaSweeper
+    storage: "postgresql://${db_cred}:${db_cred}@localhost/${database}"  # storage URL to persist optimization results
+    study_name: "denoising"  # name of the study to persist optimization results
+    n_jobs: 1  # number of parallel workers
+    direction: maximize  # 'minimize' or 'maximize' the objective
+    n_trials: 50  # total number of runs that will be executed
+
+    # Optuna hyperparameter sampler
+    sampler:
+      _target_: optuna.samplers.TPESampler
+      seed: 42
+      n_startup_trials: 5  # number of random sampling runs before optimization starts
+
+    # define hyperparameter search space
+    params:
+      model.model.num_queries: range(10, 50, step=5)
+      model.model.num_groups: int(interval(3, 7))
+      model.model.center_noise_scale: interval(0.3, 1.3)
+      model.model.width_noise_scale: interval(0.3, 1.3)
+      model.model.noise_offset: interval(0, 0.3)
+      model.losses.weight_dict.tgt_loss_span: choice(1, 3, 9)
+      model.losses.weight_dict.tgt_loss_giou: choice(1, 3, 9)
+      model.losses.weight_dict.loss_quality: choice(0, 1, 3)
+      model.losses.align_criterion.alpha: range(0.5, 4, step=0.5)
+      model.losses.align_criterion.gamma: range(0.5, 2, step=0.5)

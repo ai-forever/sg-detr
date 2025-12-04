@@ -1,0 +1,29 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: dgx
+  - data: qvhighlights_dgx
+  - optimizer: finetune
+  - postprocessor: default
+  - losses: default
+  - model: finetune
+  - callbacks: finetune
+  - logger: tensorboard
+  - trainer: gpu_finetune
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "exp_7_aux_head"
+description: "exp_7_aux_head"
+is_local_run: False
+dotenv_path: ".env"
+tags: ["exp_7_aux_head_finetune"]
+test: True
+hyper_search: False
+seed: 42

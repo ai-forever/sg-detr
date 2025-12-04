@@ -1,0 +1,13 @@
+defaults:
+  - early_stopping
+  - lr_monitor_callback
+  - model_checkpoint
+  - rich_progress_bar
+  - stochastic_weight_averaging
+  - _self_
+
+matcher_callback:
+  _target_: src.callbacks.matcher_callback.MatcherCallback
+
+offset_callback:
+  _target_: src.callbacks.offset_callback.OffsetCallback

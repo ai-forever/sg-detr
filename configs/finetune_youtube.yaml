@@ -1,0 +1,30 @@
+# @package _global_
+
+# default configuration
+defaults:
+  - paths: youtube
+  - data: youtube
+  - optimizer: finetune_youtube
+  - postprocessor: default
+  - losses: youtube
+  - model: finetune_youtube
+  - callbacks: youtube
+  - logger: tensorboard
+  - trainer: gpu_youtube
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+project_name: "MomentRetrieval"
+task_name: "YouTube"
+exp_list_name: "finetune_base"
+description: "Current state of the main branch"
+is_local_run: False
+dotenv_path: ".env"
+tags: ["YouTube_finetune"]
+test: True
+hyper_search: False
+seed: 42

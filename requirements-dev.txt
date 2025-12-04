@@ -1,0 +1,9 @@
+-r requirements.txt
+black==23.7.0
+flake8==6.0.0
+GitPython==3.1.41
+mypy==1.5.0
+pre-commit==3.3.3
+pytest==7.4.0
+types-all==1.0.0
+wemake-python-styleguide==0.18.0

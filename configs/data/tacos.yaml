@@ -1,0 +1,35 @@
+_target_: src.datamodule.MomentRetrievalDataModule
+num_workers: 20
+batch_size: 16 # 128
+
+# annotation paths
+annotation_path_train: /data/dataset/moment_retrieval/tacos/train_updated.jsonl
+annotation_path_val: /data/dataset/moment_retrieval/tacos/valid_updated.jsonl
+annotation_path_test: /data/dataset/moment_retrieval/tacos/test_updated.jsonl
+
+# caption paths
+query_feat_dir_train: /data/dataset/moment_retrieval/tacos/custom_features/custom_text/
+query_feat_dir_val: /data/dataset/moment_retrieval/tacos/custom_features/custom_text/
+query_feat_dir_test: /data/dataset/moment_retrieval/tacos/custom_features/custom_text/
+
+# video paths
+video_feat_dir_train: /data/dataset/moment_retrieval/tacos/custom_features/video_updated/
+video_feat_dir_val: /data/dataset/moment_retrieval/tacos/custom_features/video_updated/
+video_feat_dir_test: /data/dataset/moment_retrieval/tacos/custom_features/video_updated/
+
+# audio_paths
+audio_feat_dir_train: null  # /data/dataset/moment_retrieval/qvhighlights/custom_features/audio
+audio_feat_dir_val: null  # /data/dataset/moment_retrieval/qvhighlights/custom_features/audio
+audio_feat_dir_test: null  # /data/dataset/moment_retrieval/qvhighlights/custom_features/audio
+
+dataset:
+  _target_: src.dataset.qvhighlights.QVHighlights
+  _partial_: true
+  max_query_length: 40
+  max_video_length: 750 #75
+  data_ratio: 1
+  normalize_video: true
+  normalize_query: true
+  use_tef: true
+  clip_len: 2
+  max_windows: 10

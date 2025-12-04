@@ -1,0 +1,10 @@
+defaults:
+  - gpu_tacos
+  - _self_
+
+accelerator: gpu
+devices: 1
+min_steps: 33500  # prevents early stopping
+max_steps: 33500  # steps to train for
+max_epochs: 40  # epochs to train for
+gradient_clip_val: 0.1 # gradient clipping value

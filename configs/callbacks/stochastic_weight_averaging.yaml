@@ -1,0 +1,6 @@
+stochastic_weight_averaging:
+  _target_: pytorch_lightning.callbacks.StochasticWeightAveraging
+  swa_lrs: 1e-5
+  swa_epoch_start: 37
+  annealing_epochs: 3
+  annealing_strategy: "cos"

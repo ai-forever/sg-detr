@@ -1,0 +1,13 @@
+optimizer:
+  _target_: torch.optim.AdamW
+  _partial_: true
+  lr: 5e-4 #1e-3
+  weight_decay: 1e-1
+
+scheduler:
+  _target_: src.utils.scheduler.WarmupMultiStepLR
+  _partial_: true
+  warmup_steps: 5
+  initial_lr: 5e-6
+  milestones: [14, 22] #[13, 20] #[12, 18] #[20, 30]
+  gamma: 0.5

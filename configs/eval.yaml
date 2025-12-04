@@ -1,0 +1,19 @@
+# @package _global_
+defaults:
+  - paths: default
+  - data:  qvhighlights
+  - optimizer: default
+  - postprocessor: default
+  - losses: default
+  - model: default
+  - callbacks: eval
+  - trainer: gpu
+  - hydra: default
+  - experiment: null
+  - debug: null
+  - _self_
+  - hparams_search: null
+  - local: null
+
+checkpoint: "/data/reps/mr-train-repo/notebooks/best_model.ckpt"
+task_name: "eval_model"

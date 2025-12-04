@@ -1,0 +1,34 @@
+defaults:
+  - early_stopping
+  - lr_monitor_callback
+  - model_checkpoint
+  - rich_progress_bar
+  # - analysis
+  - _self_
+
+matcher_callback:
+  _target_: src.callbacks.matcher_callback.MatcherCallback
+
+offset_callback:
+  _target_: src.callbacks.offset_callback.OffsetCallback
+
+# freeze_callback:
+#   _target_: src.callbacks.freeze_callback.FreezeCallback
+#   new_lr: 5e-4
+#   freeze_epoch: 30
+#   freeze_param_group: "reference"
+
+# HistoryReferenceCallback:
+#   _target_: src.callbacks.reference_callback.HistoryReferenceCallback
+#   dirpath: ${paths.output_dir}/analysis
+#   sensitivity: 0.05
+#   frequency: 25
+
+# bootstrap_callback:
+#   _target_: src.callbacks.bootstrap_callback.BootstrapMetricCallback
+#   dirpath: ${paths.output_dir}/bootstrap
+#   bootstraps_n: 1000
+#   alpha: 0.05
+
+# nms_callback:
+#   _target_: src.callbacks.nms_callback.NMSTuningCallback

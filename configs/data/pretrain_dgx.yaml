@@ -1,0 +1,36 @@
+_target_: src.datamodule.MomentRetrievalDataModule
+num_workers: 20
+batch_size: 256
+
+# annotation paths
+annotation_path_train: /home/jovyan/mr-data/pretrain/annotation/pretrain_annotation_150k.jsonl
+annotation_path_val: /home/jovyan/mr-data/qvhighlights/annotation/highlight_val_release.jsonl
+annotation_path_test: /home/jovyan/mr-data/qvhighlights/annotation/highlight_val_release.jsonl
+
+# caption paths
+query_feat_dir_train: /home/jovyan/mr-data/pretrain/custom_text
+query_feat_dir_val: /home/jovyan/mr-data/qvhighlights/custom_text
+query_feat_dir_test: /home/jovyan/mr-data/qvhighlights/custom_text
+
+# video paths
+video_feat_dir_train: /home/jovyan/mr-data/pretrain/custom_features/video
+video_feat_dir_val: /home/jovyan/mr-data/qvhighlights/custom_features/video
+video_feat_dir_test: /home/jovyan/mr-data/qvhighlights/custom_features/video
+
+# audio paths
+audio_feat_dir_train: null # /home/jovyan/mr-data/pretrain/custom_features/audio
+audio_feat_dir_val: null # /home/jovyan/mr-data/qvhighlights/custom_features/audio
+audio_feat_dir_test: null # /home/jovyan/mr-data/qvhighlights/custom_features/audio
+
+# dataset partial init
+dataset:
+  _target_: src.dataset.qvhighlights.QVHighlights
+  _partial_: true
+  max_query_length: 40
+  max_video_length: 75
+  data_ratio: 1
+  normalize_video: true
+  normalize_query: true
+  use_tef: true
+  clip_len: 2
+  max_windows: 10

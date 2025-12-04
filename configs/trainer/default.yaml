@@ -1,0 +1,12 @@
+_target_: pytorch_lightning.trainer.Trainer
+default_root_dir: ${paths.output_dir}
+min_steps: 90000  # prevents early stopping
+max_steps: 90000  # steps to train for
+max_epochs: 160  # epochs to train for
+accelerator: cpu  # can be "cpu", "gpu", "ddp", "ddp2" or "tpu"
+accumulate_grad_batches: 1  # accumulate gradients for N batches before optimizing
+num_sanity_val_steps: 0  # run validation loop N times
+check_val_every_n_epoch: 1  # perform a validation loop every N training epochs
+deterministic: False  # set True to to ensure deterministic results
+log_every_n_steps: 3  # log every N steps
+gradient_clip_val: 0.1 # gradient clipping value
