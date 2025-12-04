@@ -12,16 +12,6 @@ Saliency-Guided DETR for Moment Retrieval and Highlight Detection
 
 [[`Paper`](https://arxiv.org/abs/2410.01615)]
 
-
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/moment-retrieval-on-charades-sta)](https://paperswithcode.com/sota/moment-retrieval-on-charades-sta?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/highlight-detection-on-qvhighlights)](https://paperswithcode.com/sota/highlight-detection-on-qvhighlights?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/zero-shot-moment-retrieval-on-qvhighlights)](https://paperswithcode.com/sota/zero-shot-moment-retrieval-on-qvhighlights?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/moment-retrieval-on-qvhighlights)](https://paperswithcode.com/sota/moment-retrieval-on-qvhighlights?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/natural-language-moment-retrieval-on-tacos)](https://paperswithcode.com/sota/natural-language-moment-retrieval-on-tacos?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/highlight-detection-on-tvsum)](https://paperswithcode.com/sota/highlight-detection-on-tvsum?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-[![PWC](https://img.shields.io/endpoint.svg?url=https://paperswithcode.com/badge/saliency-guided-detr-for-moment-retrieval-and/highlight-detection-on-youtube-highlights)](https://paperswithcode.com/sota/highlight-detection-on-youtube-highlights?p=saliency-guided-detr-for-moment-retrieval-and) </br>
-
-
 ### <div align="center">Documentation</div>
 ---
 
