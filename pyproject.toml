@@ -1,0 +1,28 @@
+[tool.black]
+target-version = ["py310"]
+line-length = 120
+
+[tool.pylint]
+max-args = 6
+max-line-length = 120
+good-names = ["i", "B", "C", "H", "W", "r", "g", "b"]
+generated-members = 'numpy.* , torch.* , cv2.* , ffmpeg.*, av.*'
+
+[tool.mypy]
+allow_redefinition = false
+check_untyped_defs = true
+disallow_any_explicit = false
+disallow_any_generics = false
+disallow_untyped_calls = true
+disallow_untyped_decorators = true
+ignore_errors = false
+ignore_missing_imports = true
+implicit_reexport = false
+local_partial_types = true
+no_implicit_optional = true
+strict_equality = true
+strict_optional = true
+warn_no_return = true
+warn_redundant_casts = true
+warn_unreachable = true
+warn_unused_configs = true
