@@ -5,13 +5,17 @@
 </p>
 
 <p><b>
-Saliency-Guided DETR for Moment Retrieval and Highlight Detection
+Saliency-Guided DETR for Moment Retrieval and Highlight Detection (WACV 2026)
 </b>
 </p>
 </div>
 
 [[`Paper`](https://arxiv.org/abs/2410.01615)]
 
+## News
+- [2024.11] Our pre-print paper is released on arXiv.
+- [2025.11] SG-DETR has been accepted to WACV 2026.
+ 
 ### <div align="center">Documentation</div>
 ---
 

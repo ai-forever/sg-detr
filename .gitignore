@@ -1,6 +1,6 @@
 # Repo-specific GitIgnore
 **.DS_Store
-#**.yaml
+**.yaml
 *.jpg
 *.jpeg
 *.png
@@ -21,7 +21,7 @@
 *.avi
 *.data
 *.json
-#*.cfg
+*.cfg
 
 runs/*
 !data/hyps/*
@@ -31,7 +31,7 @@ runs/*
 
 results*.txt
 *.csv
-#*.txt
+*.txt
 ray_results/
 runs/
 mlruns/
